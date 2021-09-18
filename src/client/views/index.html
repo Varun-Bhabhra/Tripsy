@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tripsy</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/tailwind/style.css">
+    <!-- CUSTOM STYLE SHEETS  -->
+    <link rel="stylesheet" href="/src/client/styles/base.scss">
+</head>
+
+<body class="bg-gray-900">
+
+    <nav class="flex items-center justify-evenly flex-wrap bg-gray-700 p-4">
+        <div class="flex items-center flex-shrink-0 text-yellow-500 mr-6">
+            <span class="font-bold text-xl cursor-help">Tripsy <i class="fas fa-suitcase-rolling"></i></span>
+        </div>
+
+        <div class="w-full block flex-grow sm:flex sm:items-center sm:w-auto">
+            <div class="text-sm sm:flex-grow">
+                <a href="#" class="block mt-4 sm:inline-block sm:mt-0 text-gray-200 font-semibold hover:text-white hover:underline mr-4">
+                    Home
+                </a>
+                <a href="#" class="block mt-4 sm:inline-block sm:mt-0 text-gray-200 font-semibold hover:text-white hover:underline mr-4">
+                    Weather
+                </a>
+                <a href="#" class="block mt-4 sm:inline-block sm:mt-0 text-gray-200 font-semibold hover:text-white hover:underline mr-4">
+                    Flight
+                </a>
+            </div>
+            <div>
+                <a href="" class="mr-2 inline-block text-md font-semibold px-5 py-2 leading-none border-2 border-yellow-500 rounded text-gray-200  hover:underline mt-4 md:mt-0">Log in!</a>
+
+                <a href="" class="inline-block text-md font-semibold px-4 py-2 leading-none border-2 border-yellow-500 rounded text-gray-200 bg-yellow-500 hover:underline hover:bg-yellow-500 mt-4 md:mt-0">Sign in!</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-yellow-400 via-red-600 to-pink-600 p-1"></header>
+
+    <h1 class="flex text-gray-700 font-semibold text-lg text-center mx-20 mt-10 py-2 px-2 opacity-80 hover:opacity-90 bg-yellow-100 border-4 border-yellow-400 rounded-tr-lg rounded-tl-lg">Our role is to help people plan, choose and arrange their holiday. We usually work to a budget set out by whoever is planning the holiday. We also offer advice and opinions on where to go and local
+        tourist
+        attractions, events
+        and customs.
+        <i id="closeFlash" class="fas fa-trash text-yellow-600 cursor-pointer mx-6 my-4"></i>
+    </h1>
+
+    <section class="mx-40 my-24 rounded-xl p-9 grid justify-items-center bg-gray-700 backgroundImage-hero-lg">
+
+        <legend class="md:block bg-yellow-500 rounded-lg shadow-xl">
+            <button class="w-28 rounded-lg hover:underline text-xs font-medium"><img src="/tailwind/img/flight.svg" alt="train icon" class="w-10 mx-9 p-1">Flight</button>
+            <button class="w-28 rounded-lg hover:underline text-xs font-medium"><img src="/tailwind/img/train.svg" alt="train icon" class="w-10 mx-9 p-1">Train</button>
+            <button class="w-28 rounded-lg hover:underline text-xs font-medium"><img src="/tailwind/img/cab.svg" alt="train icon" class="w-10 mx-9 p-1">Cab</button>
+        </legend>
+
+        <inputArea class="flex justify-center flex-col h-full m-2 md:flex-row md:w-auto md:h-16 md:m-4 border-2 border-yellow-500 rounded-lg shadow-xl">
+
+            <label for="from" class="text-gray-400 items-center my-4 ml-2">From:</label>
+            <input type="text" id="from" value="" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 rounded-l-md outline-none capitalize underline">
+
+            <!-- SWAP ICON -->
+            <ion-icon name="swap-horizontal-outline" id="swap" class="h-4 w-10 p-1 bg-yellow-500 rounded-lg cursor-pointer opacity-95 hover:opacity-100"></ion-icon>
+
+            <label for="to" class="text-gray-400 items-center my-4 ml-2">To:</label>
+            <input type="text" id="to" value="" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 outline-none capitalize underline">
+
+            <label for="dept" class="text-gray-400 items-center my-4 ml-2">Departure:</label>
+            <input type="date" id="dept" class="md:w-3/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 outline-none">
+
+            <label for="traveller" class="text-gray-400 items-center my-4 ml-2">Traveller(s):</label>
+            <select type="text" id="traveller" class=" md:w-2/6 p-5 bg-gray-700 text-yellow-200 rounded-r-md outline-none">
+                <option value="">--Select--</option>
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+                <option value="">4</option>
+                <option value="">5</option>
+                <option value="">6</option>
+                <option value="">7</option>
+                <option value="">8</option>
+                <option value="">9</option>
+                <option value="">...</option>
+            </select>
+        </inputArea>
+
+        <button id="searchBtn" class="px-12 mt-4 rounded-full md:px-10 bg-yellow-500 hover:bg-yellow-400 outline-none shadow-sm"><img src="/tailwind/img/search.svg" alt="search" class="inline w-12"></button>
+    </section>
+
+    <!-- <main class="container flex flex-col items-center justify-center text-white p-6">
+        <div class="0">
+            <div id="img" class="">
+                <img src="/tailwind/img/waves.png" alt="image" class="flex justify-center w-48 rounded">
+            </div>
+            <div id="details" class="">
+                <h1 class="para">I am all the details about the image</h1>
+            </div>
+        </div>
+    </main> -->
+
+    <!-- <footer class="w-full bg-gray-700 p-4 text-gray-300">hello</footer> -->
+
+    <!-- <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+    </script> -->
+
+    <!-- ICON PACK CDN  -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
