@@ -1,3 +1,6 @@
+// <--ALL THE API's AND INFORMATION RELATED API's/-->
+
+
 // <--ALL SELECTORS-->
 const searchBtn = document.querySelector('#searchBtn');
 const swapBtn = document.querySelector('#swap');
@@ -9,18 +12,15 @@ let input_to = document.querySelector('#to');
 // <--ALL VARIABLE DECLARATIONS-->
 
 // <--FUNCTIONS & EVENT LISTENERS-->
+const hideFlash = () => flashMsg.classList.add('hidden');
+closeFlash.addEventListener('click', hideFlash);
 
-const hideFlash = function () {
-    flashMsg.classList.add('hidden')
-}
-
-closeFlash.addEventListener('click', hideFlash)
-
-const swapInput = function () {
+const swapInput = () => {
     let fromValue = input_from.value,
         toValue = input_to.value;
-    if (!fromValue && !toValue) {
-        alert('Input is empty, Type something')
+
+    if (!fromValue || !toValue) {
+        alert('Input area is empty, kindly add a City!')
     } else {
         input_from.value = toValue;
         input_to.value = fromValue;
