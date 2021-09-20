@@ -1,5 +1,4 @@
 // <--ALL THE API's AND INFORMATION RELATED API's-->
-
 /* 
 1. WeatherBit API
 https://www.weatherbit.io/api/weather-forecast-16-day
@@ -12,53 +11,46 @@ const searchBtn = document.querySelector('#searchBtn');
 const swapBtn = document.querySelector('#swap');
 const closeFlash = document.querySelector('#closeFlash');
 const flashMsg = document.querySelector('h1');
+const weatherForcast = document.querySelector('.weatherForcast');
 let input_from = document.querySelector('#from');
 let input_to = document.querySelector('#to');
 
 // <--ALL VARIABLE DECLARITION-->
-let cityName = '';
 
 // <--FUNCTIONS & EVENT LISTENERS-->
+
+//Flash Message Logic
 const hideFlash = () => flashMsg.classList.add('hidden');
 closeFlash.addEventListener('click', hideFlash);
 
-const swapInput = () => {
+// Input Validation Function 
+
+// Swap Button Logic
+const InputValidation = () => {
     let fromValue = input_from.value,
         toValue = input_to.value;
 
     if (!fromValue || !toValue) {
-        alert('Input area is empty, kindly add a City!')
+        alert('Input area is empty, kindly add a city!')
     } else {
         input_from.value = toValue;
         input_to.value = fromValue;
     }
 };
-swapBtn.addEventListener('click', swapInput)
+swapBtn.addEventListener('click', InputValidation)
+
 
 function test() {
-    const weatherbit_final_URL = `${weatherbit_base_URL}?key=${weatherbit_api_key}&city=${cityName}`
+    const weatherbit_final_URL = `${weatherbit_base_URL}?key=${weatherbit_api_key}&city=${input_to.value}`
 
     getForcast(weatherbit_final_URL)
         .then((allData) => {
-            const temperature = allData.main.temp;
-            const { name, coord, main, sys, weather } = allData;
-            const { lon, lat } = coord;
-            const { temp_min, temp_max, humidity } = main;
-            const { country } = sys;
-            save("/create", {
-                temperature: temperature,
-                name: name,
-                coord: coord,
-                main: main,
-                sys: sys,
-                weather: weather,
-                lon: lon,
-                lat: lat,
-                temp_min: temp_min,
-                temp_max: temp_max,
-                humidity: humidity,
-                country: country
-            });
+            const { city_name, lon, lat, timezone, country_code } = allData
+            console.log(`${city_name} => ${country_code} => ${timezone} => ${Math.trunc(lon)} => ${Math.trunc(lat)}`)
+            const { valid_date, temp } = allData.data[0];
+            const { description } = allData.data[0].weather;
+            console.log(`${valid_date} => ${description} => ${temp}`);
+            weatherForcast.append(`City Name = ${city_name}, Longitude = ${lon}, Latitude = ${lat}, Country Code = ${country_code}, Todays Date = ${valid_date}, Temperature = ${temp}, Climate = ${description}`)
         })
         .then(() => getData("/all"));
 }
@@ -81,15 +73,25 @@ const save = async (url, data) => {
         },
         body: JSON.stringify(data),
     });
-    // const saveResult = await res.json();
 };
 
 const getData = async (url) => {
-    const response = await fetch(url);
+    // const response = await fetch(url);
     try {
-        console.log(response);
-
+        // const allData = await response.json();
+        // console.log(allData);
     } catch (err) {
         console.log('error', err)
     }
 }
+
+searchBtn.addEventListener('click', () => {
+    let fromValue = input_from.value,
+        toValue = input_to.value;
+
+    if (!fromValue || !toValue) {
+        alert('Input area is empty, kindly add a city!')
+    } else {
+        test()
+    }
+})

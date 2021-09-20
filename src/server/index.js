@@ -1,4 +1,4 @@
-let projectData = {}; //ersther
+let projectData = {};
 
 const express = require('express');
 const cors = require('cors');

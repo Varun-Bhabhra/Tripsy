@@ -21,9 +21,9 @@
 
         <div class="w-full block flex-grow sm:flex sm:items-center sm:w-auto">
             <div class="text-sm sm:flex-grow">
-                <a href="#" class="block mt-4 sm:inline-block sm:mt-0 text-gray-200 font-semibold hover:text-white hover:underline mr-4">
+                <button href="#" class="block mt-4 sm:inline-block sm:mt-0 text-gray-200 font-semibold hover:text-white hover:underline mr-4">
                     Home
-                </a>
+                </button>
                 <a href="#" class="block mt-4 sm:inline-block sm:mt-0 text-gray-200 font-semibold hover:text-white hover:underline mr-4">
                     Weather
                 </a>
@@ -41,11 +41,11 @@
 
     <header class="bg-gradient-to-r from-yellow-400 via-red-600 to-pink-600 p-1"></header>
 
-    <h1 class="flex text-gray-700 font-semibold text-lg text-center mx-20 mt-10 py-1 px-2 opacity-80 hover:opacity-90 bg-yellow-100 border-4 border-yellow-400 rounded-md">Our role is to help people plan, choose and arrange their holiday. We usually work to a budget set out by whoever is planning the holiday. We also offer advice and opinions on where to go and local
+    <h1 class="flex justify-center gap-20 text-center text-yellow-900 font-mono text-sm mx-20 mt-10 p-2 opacity-90 bg-yellow-100 rounded-md">Our role is to help people plan, choose and arrange their holiday. We usually work to a budget set out by whoever is planning the holiday. We also offer advice and opinions on where to go and local
         tourist
         attractions, events
         and customs.
-        <i id="closeFlash" class="fas fa-times-circle text-red-600 cursor-pointer mx-4 my-4"></i>
+        <i id="closeFlash" class="fas fa-trash text-yellow-600 cursor-pointer mx-5 my-5"></i>
     </h1>
 
     <section class="mx-40 my-24 rounded-xl p-9 grid justify-items-center bg-gray-700 backgroundImage-hero-lg">
@@ -59,20 +59,19 @@
         <inputArea class="flex justify-center flex-col h-full m-2 md:flex-row md:w-auto md:h-16 md:m-4 border-2 border-yellow-500 rounded-lg shadow-xl">
 
             <label for="from" class="text-gray-400 items-center my-4 ml-2">From:</label>
-            <input type="text" id="from" value="" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 rounded-l-md outline-none capitalize underline">
+            <input type="text" id="from" value="" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 rounded-l-md outline-none capitalize" placeholder="--Goa--">
 
             <!-- SWAP ICON -->
             <ion-icon name="swap-horizontal-outline" id="swap" class="h-4 w-10 p-1 bg-yellow-500 rounded-lg cursor-pointer opacity-95 hover:opacity-100"></ion-icon>
 
             <label for="to" class="text-gray-400 items-center my-4 ml-2">To:</label>
-            <input type="text" id="to" value="" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 outline-none capitalize underline">
+            <input type="text" id="to" value="" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 outline-none capitalize" placeholder="--Pune--">
 
             <label for="dept" class="text-gray-400 items-center my-4 ml-2">Departure:</label>
             <input type="date" id="dept" class="md:w-3/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 outline-none">
 
             <label for="traveller" class="text-gray-400 items-center my-4 ml-2">Traveller(s):</label>
-            <select type="text" id="traveller" class=" md:w-2/6 p-5 bg-gray-700 text-yellow-200 rounded-r-md outline-none">
-                <option value="">--Select--</option>
+            <select type="text" id="traveller" class=" md:w-2/6 p-5 bg-gray-700 text-yellow-200 rounded-r-md outline-none text-center">
                 <option value="">1</option>
                 <option value="">2</option>
                 <option value="">3</option>
@@ -89,19 +88,66 @@
         <button id="searchBtn" class="px-12 mt-4 rounded-full md:px-10 bg-yellow-500 hover:bg-yellow-400 outline-none shadow-sm"><img src="/tailwind/img/search2.svg" alt="search" class="inline w-12"></button>
     </section>
 
-    <main class="flex flex-col items-center justify-center text-white p-6">
-        <h1></h1>
-        <!-- <div class="0">
+    <main class="max-w-7xl mx-auto my-10 flex flex-col items-center justify-center text-year-800 p-12 bg-yellow-100 rounded-lg">
+        <div class="">
+
             <div id="img" class="">
-                <img src="/tailwind/img/waves.png" alt="image" class="flex justify-center w-48 rounded">
+                <img src="/tailwind/img/" alt="" class="flex justify-center w-48 rounded">
             </div>
+
             <div id="details" class="">
-                <h1 class="para">I am all the details about the image</h1>
+                <span class="weatherForcast text-gray-700"></span>
             </div>
-        </div> -->
+
+        </div>
     </main>
 
-    <!-- <footer class="w-full bg-gray-700 p-4 text-gray-300">hello</footer> -->
+    <footer class="w-full h-full flex justify-around bg-gray-700 p-4 text-gray-300 text-center font-thin border-t border-gray-600">
+        <img src="/tailwind/img/Socials_img.svg" alt="illustration of People using social Media" class="hidden md:block object-contain w-6/12 h-80">
+
+        <div class="w-4/6">
+            <section class="my-6 w-full">
+                <input type="text" class="outline-none rounded-full p-4 bg-gray-700 border-2 border-gray-200 w-6/12" placeholder="">
+                <button id="register" class="rounded-full p-4 bg-gray-200 hover:bg-gray-300 text-gray-700 w-5/12 hover:underline font-mono">Register</button>
+            </section>
+
+            <div class="my-6 flex gap-24 justify-around leading-9 ">
+                <article class="text-left ">
+                    <h1 class="font-bold">Partnership</h1>
+                    <a href="#" class="block hover:underline">Website</a>
+                    <a href="#" class="block hover:underline">Social Media</a>
+                    <a href="#" class="block hover:underline">Branding</a>
+                </article>
+
+                <article class="text-left">
+                    <h1 class="font-bold">About</h1>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" class=" hover:underline">HTML</a>
+                    &
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" class="hover:underline">CSS</a>
+                    <a href="https://tailwindcss.com/" target="_blank" class="block hover:underline">Tailwind CSS</a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="block hover:underline">Javascript</a>
+                </article>
+
+                <article class="text-left">
+                    <h1 class="font-bold">Support</h1>
+                    <a href="#" class="block hover:underline">Support Request</a>
+                    <a href="#" class="block hover:underline">Contact</a>
+                </article>
+            </div>
+
+            <hr class="opacity-20">
+
+            <section class="my-6 flex justify-around">
+                <span class="font-semibold">All rights reserved @Tripsy 2020</span>
+                <div class="">
+                    <a href="https://twitter.com/VBhabhra" target="_blank"><i class="fab fa-twitter-square cursor-pointer px-3 text-3xl hover:text-blue-500"></i></a>
+                    <a href="https://www.reddit.com/user/Varun_Bhabhra" target="_blank"><i class="fab fa-reddit-square cursor-pointer px-3 text-3xl hover:text-red-400"></i></a>
+                    <a href="https://www.facebook.com/bhabhravarun" target="_blank"><i class="fab fa-facebook-square cursor-pointer px-3 text-3xl hover:text-blue-600"></i></a>
+                    <a href="https://www.instagram.com/bhabhra_ji/?hl=en" target="_blank"><i class="fab fa-instagram cursor-pointer px-3 text-3xl hover:text-pink-500"></i></a>
+                </div>
+            </section>
+        </div>
+    </footer>
 
     <!-- <script>
         // Check that service workers are supported
