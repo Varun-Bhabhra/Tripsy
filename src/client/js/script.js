@@ -18,13 +18,22 @@ const searchBtn = document.querySelector('#searchBtn');
 const swapBtn = document.querySelector('#swap');
 const closeFlash = document.querySelector('#closeFlash');
 const flashMsg = document.querySelector('h1');
-const weatherForcast = document.querySelector('.weatherForcast');
+const date = document.querySelector('.date');
+const temperature = document.querySelector('.temperature');
+const details = document.querySelector('.details');
+const nameCode = document.querySelector('.nameCode');
+const latlon = document.querySelector('.latlon');
 const searchImageTag = document.querySelector('#searchImageTag');
 let input_from = document.querySelector('#from');
 let input_to = document.querySelector('#to');
 
 // <--ALL VARIABLE DECLARITION-->
-const imageSearchTerms = ['forest', 'mountains', 'beach', 'adventure', 'streets', 'hotels', 'highways']
+const imageSearchTerms = ['scenery', 'lighthouse', 'travel']
+// const monthNames = ["January", "February", "March", "April", "May", "June",
+//     "July", "August", "September", "October", "November", "December"];
+
+// let d = new Date();
+// let date = `${d.getDate()}-${monthNames[d.getMonth()]}-${d.getFullYear()}`;
 
 // <--FUNCTIONS & EVENT LISTENERS-->
 
@@ -48,24 +57,30 @@ swapBtn.addEventListener('click', InputValidation)
 
 function test() {
     const weatherbit_final_URL = `${weatherbit_base_URL}?key=${weatherbit_api_key}&city=${input_to.value}`
-    let pixabay_final_URL = `${pixabay_base_URL}?key=${pixabay_api_key}&?q=${imageSearchTerms[Math.trunc(Math.random() * imageSearchTerms.length)]}&image_type=photo&per_page=5`;
+    let pixabay_final_URL = `${pixabay_base_URL}?key=${pixabay_api_key}&?q=${imageSearchTerms[Math.trunc(Math.random() * imageSearchTerms.length)]}&image_type=photo&per_page=50`;
     console.log(pixabay_final_URL)
 
     getResponse(pixabay_final_URL)
         .then((allData) => {
-            let searchImage = allData.hits[2].largeImageURL;
-            searchImageTag.setAttribute('src', searchImage)
+            let searchImage = allData.hits[Math.trunc(Math.random() * 50)].largeImageURL;
+            searchImageTag.setAttribute('src', searchImage);
+            searchImageTag.classList.add('border-4');
+            searchImageTag.classList.add('border-gray-800');
+            searchImageTag.classList.remove('ml-80');
         })
         .then(() => getData("/all"));
 
     getResponse(weatherbit_final_URL)
         .then((allData) => {
             const { city_name, lon, lat, timezone, country_code } = allData
-            // console.log(`${city_name} => ${country_code} => ${timezone} => ${Math.trunc(lon)} => ${Math.trunc(lat)}`)
             const { valid_date, temp } = allData.data[0];
             const { description } = allData.data[0].weather;
-            // console.log(`${valid_date} => ${description} => ${temp}`);
-            weatherForcast.append(`City Name = ${city_name}, Longitude = ${lon}, Latitude = ${lat}, Country Code = ${country_code}, Todays Date = ${valid_date}, Temperature = ${temp}, Climate = ${description}`)
+
+            nameCode.append(`${city_name}, ${country_code}`)
+            latlon.append(`${lon} / ${lat}`);
+            date.append(`Date: ${valid_date}`)
+            temperature.append(`${temp}°C`)
+            details.append(`${description}`)
         })
         .then(() => getData("/all"));
 }

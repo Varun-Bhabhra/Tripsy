@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="icon" href="/tailwind/img/directions_icon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/tailwind/style.css">
+    <link rel="stylesheet" href="../../../tailwind/style.css">
     <!-- CUSTOM STYLE SHEETS  -->
     <link rel="stylesheet" href="/src/client/styles/base.scss">
 </head>
@@ -92,17 +92,27 @@
         <button id="searchBtn" class="px-12 mt-4 rounded-full md:px-10 bg-yellow-500 hover:bg-yellow-400 outline-none shadow-sm"><img src="/tailwind/img/search2.svg" alt="search" class="inline w-12"></button>
     </section>
 
+    <hr class="opacity-20 w-11/12 mx-auto">
+
     <!-- Output Section -->
-    <main class="max-w-7xl mx-auto my-10 flex flex-col items-center justify-center text-year-800 p-12 bg-yellow-100 rounded-lg">
-        <div class="">
+    <main class="w-full mx-auto my-10 text-year-800 p-4">
+        <div class="flex gap-2">
 
-            <div id="img" class="">
-                <img src="" alt="" id="searchImageTag" class="flex justify-center w-48 rounded">
+            <div id="img" class="w-1/2">
+                <img src="/tailwind/img/Re-searching.svg" alt="" id="searchImageTag" class="flex justify-center rounded object-contain max-h-full ml-80">
             </div>
 
-            <div id="details" class="">
-                <span class="weatherForcast text-gray-700"></span>
+            <div id="details" class="w-1/2 flex flex-col">
+                <span class="nameCode text-yellow-200 text-7xl items-center mx-auto"></span>
+                <span class="latlon text-gray-200 text-lg mx-auto my-2"></span>
+                <div class="flex justify-around my-4">
+                    <span class="date text-gray-100"></span>
+                    <span class="temperature text-gray-100"></span>
+                    <span class="details text-gray-100"></span>
+                </div>
+
             </div>
+        </div>
 
         </div>
     </main>
