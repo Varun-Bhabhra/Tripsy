@@ -14,6 +14,7 @@
 
 <body class="bg-gray-900">
 
+    <!-- Navbar -->
     <nav class="flex items-center justify-evenly flex-wrap bg-gray-700 p-4">
         <div class="flex items-center flex-shrink-0 text-yellow-500 mr-6">
             <span class="font-bold text-xl cursor-help">Tripsy <i class="fas fa-suitcase-rolling"></i></span>
@@ -39,8 +40,10 @@
         </div>
     </nav>
 
+    <!-- Gradiant Bar -->
     <header class="bg-gradient-to-r from-yellow-400 via-red-600 to-pink-600 p-1"></header>
 
+    <!-- Flash Message -->
     <h1 class="flex justify-center gap-20 text-center text-yellow-900 font-mono text-sm mx-20 mt-10 p-2 opacity-90 bg-yellow-100 rounded-md">Our role is to help people plan, choose and arrange their holiday. We usually work to a budget set out by whoever is planning the holiday. We also offer advice and opinions on where to go and local
         tourist
         attractions, events
@@ -48,6 +51,7 @@
         <i id="closeFlash" class="fas fa-trash text-yellow-600 cursor-pointer mx-5 my-5"></i>
     </h1>
 
+    <!-- Input Section -->
     <section class="mx-40 my-24 rounded-xl p-9 grid justify-items-center bg-gray-700 backgroundImage-hero-lg">
 
         <legend class="md:block bg-yellow-500 rounded-lg shadow-xl">
@@ -59,13 +63,13 @@
         <inputArea class="flex justify-center flex-col h-full m-2 md:flex-row md:w-auto md:h-16 md:m-4 border-2 border-yellow-500 rounded-lg shadow-xl">
 
             <label for="from" class="text-gray-400 items-center my-4 ml-2">From:</label>
-            <input type="text" id="from" value="" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 rounded-l-md outline-none capitalize" placeholder="--Goa--">
+            <input type="text" id="from" value="goa" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 rounded-l-md outline-none capitalize" placeholder="--Goa--">
 
             <!-- SWAP ICON -->
             <ion-icon name="swap-horizontal-outline" id="swap" class="h-4 w-10 p-1 bg-yellow-500 rounded-lg cursor-pointer opacity-95 hover:opacity-100"></ion-icon>
 
             <label for="to" class="text-gray-400 items-center my-4 ml-2">To:</label>
-            <input type="text" id="to" value="" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 outline-none capitalize" placeholder="--Pune--">
+            <input type="text" id="to" value="pune" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 outline-none capitalize" placeholder="--Pune--">
 
             <label for="dept" class="text-gray-400 items-center my-4 ml-2">Departure:</label>
             <input type="date" id="dept" class="md:w-3/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 outline-none">
@@ -88,11 +92,12 @@
         <button id="searchBtn" class="px-12 mt-4 rounded-full md:px-10 bg-yellow-500 hover:bg-yellow-400 outline-none shadow-sm"><img src="/tailwind/img/search2.svg" alt="search" class="inline w-12"></button>
     </section>
 
+    <!-- Output Section -->
     <main class="max-w-7xl mx-auto my-10 flex flex-col items-center justify-center text-year-800 p-12 bg-yellow-100 rounded-lg">
         <div class="">
 
             <div id="img" class="">
-                <img src="/tailwind/img/" alt="" class="flex justify-center w-48 rounded">
+                <img src="" alt="" id="searchImageTag" class="flex justify-center w-48 rounded">
             </div>
 
             <div id="details" class="">
@@ -102,46 +107,47 @@
         </div>
     </main>
 
+    <!-- Footer  -->
     <footer class="w-full h-full flex justify-around bg-gray-700 p-4 text-gray-300 text-center font-thin border-t border-gray-600">
         <img src="/tailwind/img/Socials_img.svg" alt="illustration of People using social Media" class="hidden md:block object-contain w-6/12 h-80">
 
-        <div class="w-4/6">
+        <div class="w-full md:w-4/6">
             <section class="my-6 w-full">
-                <input type="text" class="outline-none rounded-full p-4 bg-gray-700 border-2 border-gray-200 w-6/12" placeholder="">
-                <button id="register" class="rounded-full p-4 bg-gray-200 hover:bg-gray-300 text-gray-700 w-5/12 hover:underline font-mono">Register</button>
+                <input type="text" class="outline-none rounded-full p-4 bg-gray-700 border-2 border-gray-200 w-6/12" placeholder="Your e-mail">
+                <button id="register" class="rounded-full p-4 bg-gray-200 text-gray-700 w-3/12 border-4 border-gray-200 hover:text-gray-50 hover:bg-yellow-400 font-mono">Subscribe</button>
             </section>
 
-            <div class="my-6 flex gap-24 justify-around leading-9 ">
-                <article class="text-left ">
-                    <h1 class="font-bold">Partnership</h1>
-                    <a href="#" class="block hover:underline">Website</a>
-                    <a href="#" class="block hover:underline">Social Media</a>
-                    <a href="#" class="block hover:underline">Branding</a>
-                </article>
+            <div class="my-6 flex gap-24 justify-around leading-9">
+                <section class="text-left ">
+                    <h1 class="font-bold">API(s)</h1>
+                    <a href="https://www.weatherbit.io/" target="_blank" class="block hover:underline hover:text-gray-50">Weatherbit API</a>
+                    <a href="https://www.flightapi.io/" target="_blank" class="block hover:underline">Flight API</a>
+                    <a href="#" target="_blank" class="block hover:underline">Branding</a>
+                </section>
 
-                <article class="text-left">
+                <section class="text-left">
                     <h1 class="font-bold">About</h1>
                     <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" class=" hover:underline">HTML</a>
                     &
                     <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" class="hover:underline">CSS</a>
-                    <a href="https://tailwindcss.com/" target="_blank" class="block hover:underline">Tailwind CSS</a>
                     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="block hover:underline">Javascript</a>
-                </article>
+                    <a href="https://tailwindcss.com/" target="_blank" class="block hover:underline">Tailwind CSS</a>
+                </section>
 
-                <article class="text-left">
+                <section class="text-left">
                     <h1 class="font-bold">Support</h1>
                     <a href="#" class="block hover:underline">Support Request</a>
                     <a href="#" class="block hover:underline">Contact</a>
-                </article>
+                </section>
             </div>
 
             <hr class="opacity-20">
 
-            <section class="my-6 flex justify-around">
-                <span class="font-semibold">All rights reserved @Tripsy 2020</span>
+            <section class="mt-6 flex justify-around">
+                <span class="font-semibold">All rights reserved <i class="far fa-copyright"></i>Tripsy 2021</span>
                 <div class="">
                     <a href="https://twitter.com/VBhabhra" target="_blank"><i class="fab fa-twitter-square cursor-pointer px-3 text-3xl hover:text-blue-500"></i></a>
-                    <a href="https://www.reddit.com/user/Varun_Bhabhra" target="_blank"><i class="fab fa-reddit-square cursor-pointer px-3 text-3xl hover:text-red-400"></i></a>
+                    <a href="https://www.reddit.com/user/Varun_Bhabhra" target="_blank"><i class="fab fa-github-square cursor-pointer px-3 text-3xl hover:text-gray-800"></i></a>
                     <a href="https://www.facebook.com/bhabhravarun" target="_blank"><i class="fab fa-facebook-square cursor-pointer px-3 text-3xl hover:text-blue-600"></i></a>
                     <a href="https://www.instagram.com/bhabhra_ji/?hl=en" target="_blank"><i class="fab fa-instagram cursor-pointer px-3 text-3xl hover:text-pink-500"></i></a>
                 </div>
