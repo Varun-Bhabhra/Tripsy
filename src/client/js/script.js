@@ -1,11 +1,13 @@
 // <--ALL THE API's AND INFORMATION RELATED API's-->
+
+const moment = require("moment");
+
 /* 
 1. WeatherBit API
 https://www.weatherbit.io/api/weather-forecast-16-day
 */
 const weatherbit_base_URL = 'https://api.weatherbit.io/v2.0/forecast/daily';
 const weatherbit_api_key = '5743ac4e4b894a8eaf444a7ea695bb16';
-
 /* 
 1. Pixabay API
 https://pixabay.com/api/docs/
@@ -18,9 +20,8 @@ const searchBtn = document.querySelector('#searchBtn');
 const swapBtn = document.querySelector('#swap');
 const closeFlash = document.querySelector('#closeFlash');
 const flashMsg = document.querySelector('h1');
-const date = document.querySelector('.date');
-const temperature = document.querySelector('.temperature');
-const details = document.querySelector('.details');
+const outputSection = document.querySelector('#output');
+const details = document.querySelector('#details');
 const nameCode = document.querySelector('.nameCode');
 const latlon = document.querySelector('.latlon');
 const searchImageTag = document.querySelector('#searchImageTag');
@@ -29,13 +30,13 @@ let input_to = document.querySelector('#to');
 
 // <--ALL VARIABLE DECLARITION-->
 const imageSearchTerms = ['scenery', 'lighthouse', 'travel']
-// const monthNames = ["January", "February", "March", "April", "May", "June",
-//     "July", "August", "September", "October", "November", "December"];
-
-// let d = new Date();
-// let date = `${d.getDate()}-${monthNames[d.getMonth()]}-${d.getFullYear()}`;
+const monthNames = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
 
 // <--FUNCTIONS & EVENT LISTENERS-->
+
+// Date Function
+let d = new Date();
+let todayDate = `${d.getFullYear()}-${monthNames[d.getMonth()]}-${d.getDate()}`;
 
 //Flash Message Logic
 const hideFlash = () => flashMsg.classList.add('hidden');
@@ -55,11 +56,13 @@ const InputValidation = () => {
 };
 swapBtn.addEventListener('click', InputValidation)
 
+// Fetch Data Function
 function test() {
     const weatherbit_final_URL = `${weatherbit_base_URL}?key=${weatherbit_api_key}&city=${input_to.value}`
     let pixabay_final_URL = `${pixabay_base_URL}?key=${pixabay_api_key}&?q=${imageSearchTerms[Math.trunc(Math.random() * imageSearchTerms.length)]}&image_type=photo&per_page=50`;
-    console.log(pixabay_final_URL)
+    // console.log(pixabay_final_URL)
 
+    // Responce Data from Pixabay [Image]
     getResponse(pixabay_final_URL)
         .then((allData) => {
             let searchImage = allData.hits[Math.trunc(Math.random() * 50)].largeImageURL;
@@ -70,29 +73,62 @@ function test() {
         })
         .then(() => getData("/all"));
 
+    // Responce Data from Weatherbit [Weather Data]
     getResponse(weatherbit_final_URL)
         .then((allData) => {
-            const { city_name, lon, lat, timezone, country_code } = allData
+
+            const { city_name, lon, lat, timezone, country_code } = allData;
             const { valid_date, temp } = allData.data[0];
             const { description } = allData.data[0].weather;
+            const APIData = allData.data;
 
             nameCode.append(`${city_name}, ${country_code}`)
             latlon.append(`${lon} / ${lat}`);
-            date.append(`Date: ${valid_date}`)
-            temperature.append(`${temp}°C`)
-            details.append(`${description}`)
+
+            const last_date = moment().add(6, 'days').format('YYYY-MM-DD');
+            let forcast = APIData.filter(item => item.valid_date > todayDate && item.valid_date <= last_date);
+
+            console.log(details.childNodes);
+
+            // let detailsChild = details.childNodes;
+            // if (detailsChild.length === 5) {
+            //     for (let i = 0; i < 5; i++) {
+            //         details.removeChild();
+            //     }
+            // }
+
+            for (let i = 0; i <= 6; i++) {
+
+                const detailsDiv = document.createElement('DIV');
+                detailsDiv.setAttribute('class', 'flex text-gray-100 justify-around my-4')
+                const dateSpan = document.createElement('SPAN');
+                dateSpan.setAttribute('class', 'date')
+                const tempSpan = document.createElement('SPAN');
+                tempSpan.setAttribute('class', 'temperature')
+                const detailsSpan = document.createElement('SPAN');
+                detailsSpan.setAttribute('class', 'details')
+
+                details.appendChild(detailsDiv)
+                detailsDiv.appendChild(dateSpan)
+                detailsDiv.append(tempSpan)
+                detailsDiv.append(detailsSpan)
+
+                dateSpan.append(`Date: ${forcast[i].valid_date}`)
+                tempSpan.append(`${forcast[i].temp}°C`)
+                detailsSpan.append(`${forcast[i].weather.description}`)
+            }
         })
         .then(() => getData("/all"));
 }
 
-// QueryWeather Service
+// Query Service
 async function getResponse(finalURL) {
     const res = await fetch(finalURL);
     const weatherData = await res.json();
     return weatherData;
 }
 
-// save function,
+// Save function,
 const save = async (url, data) => {
     const res = await fetch(url, {
         method: "POST",
@@ -114,6 +150,7 @@ const getData = async (url) => {
     }
 }
 
+// Search button Validation
 searchBtn.addEventListener('click', () => {
     let fromValue = input_from.value,
         toValue = input_to.value;

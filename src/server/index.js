@@ -1,5 +1,8 @@
 let projectData = {};
 
+import moment from 'moment';
+moment().format();
+
 const express = require('express');
 const cors = require('cors');
 const mockAPIResponse = require('./mockAPI.js')

@@ -63,13 +63,13 @@
         <inputArea class="flex justify-center flex-col h-full m-2 md:flex-row md:w-auto md:h-16 md:m-4 border-2 border-yellow-500 rounded-lg shadow-xl">
 
             <label for="from" class="text-gray-400 items-center my-4 ml-2">From:</label>
-            <input type="text" id="from" value="goa" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 rounded-l-md outline-none capitalize" placeholder="--Goa--">
+            <input type="text" id="from" value="goa" spellcheck="true" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 rounded-l-md outline-none capitalize" placeholder="--Goa--">
 
             <!-- SWAP ICON -->
             <ion-icon name="swap-horizontal-outline" id="swap" class="h-4 w-10 p-1 bg-yellow-500 rounded-lg cursor-pointer opacity-95 hover:opacity-100"></ion-icon>
 
             <label for="to" class="text-gray-400 items-center my-4 ml-2">To:</label>
-            <input type="text" id="to" value="pune" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 outline-none capitalize" placeholder="--Pune--">
+            <input type="text" id="to" value="pune" spellcheck="true" class="md:w-2/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 outline-none capitalize" placeholder="--Pune--">
 
             <label for="dept" class="text-gray-400 items-center my-4 ml-2">Departure:</label>
             <input type="date" id="dept" class="md:w-3/6 p-5 bg-gray-700 text-yellow-200 md:border-r-2 border-yellow-500 outline-none">
@@ -95,7 +95,7 @@
     <hr class="opacity-20 w-11/12 mx-auto">
 
     <!-- Output Section -->
-    <main class="w-full mx-auto my-10 text-year-800 p-4">
+    <main id="output" class="w-full mx-auto my-10 text-year-800 p-4">
         <div class="flex gap-2">
 
             <div id="img" class="w-1/2">
@@ -103,13 +103,9 @@
             </div>
 
             <div id="details" class="w-1/2 flex flex-col">
+
                 <span class="nameCode text-yellow-200 text-7xl items-center mx-auto"></span>
                 <span class="latlon text-gray-200 text-lg mx-auto my-2"></span>
-                <div class="flex justify-around my-4">
-                    <span class="date text-gray-100"></span>
-                    <span class="temperature text-gray-100"></span>
-                    <span class="details text-gray-100"></span>
-                </div>
 
             </div>
         </div>
@@ -132,7 +128,7 @@
                     <h1 class="font-bold">API(s)</h1>
                     <a href="https://www.weatherbit.io/" target="_blank" class="block hover:underline hover:text-gray-50">Weatherbit API</a>
                     <a href="https://www.flightapi.io/" target="_blank" class="block hover:underline">Flight API</a>
-                    <a href="#" target="_blank" class="block hover:underline">Branding</a>
+                    <a href="https://pixabay.com/api/docs/" target="_blank" class="block hover:underline">Pixabay API</a>
                 </section>
 
                 <section class="text-left">
