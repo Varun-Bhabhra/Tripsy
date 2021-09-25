@@ -22,8 +22,6 @@ const closeFlash = document.querySelector('#closeFlash');
 const flashMsg = document.querySelector('h1');
 const outputSection = document.querySelector('#output');
 const details = document.querySelector('#details');
-const nameCode = document.querySelector('.nameCode');
-const latlon = document.querySelector('.latlon');
 const searchImageTag = document.querySelector('#searchImageTag');
 let input_from = document.querySelector('#from');
 let input_to = document.querySelector('#to');
@@ -54,7 +52,7 @@ const InputValidation = () => {
         input_to.value = fromValue;
     }
 };
-swapBtn.addEventListener('click', InputValidation)
+swapBtn.addEventListener('click', InputValidation);
 
 // Fetch Data Function
 function test() {
@@ -77,48 +75,66 @@ function test() {
     getResponse(weatherbit_final_URL)
         .then((allData) => {
 
-            const { city_name, lon, lat, timezone, country_code } = allData;
+            const { city_name, lon, lat, country_code } = allData;
             const { valid_date, temp } = allData.data[0];
             const { description } = allData.data[0].weather;
             const APIData = allData.data;
+            // save("/create", {
+            //     city_name: city_name,
+            //     lon: lon,
+            //     lat: lat,
+            //     country_code: country_code,
+            //     valid_date: valid_date,
+            //     temp: temp,
+            //     description: description
+            // })
+
+            const last_date = moment().add(7, 'days').format('YYYY-MM-DD');
+            let forcast = APIData.filter(item => item.valid_date > todayDate && item.valid_date <= last_date);
+
+            console.log(details.childNodes);
+            const detailsChilds = details.childNodes;
+            if (detailsChilds.length === 12) {
+                for (let j = 0; j <= 12; j++) {
+                    console.log(details.childNodes)
+                    details.removeChild(details.childNodes[0])
+                }
+            }
+
+            // Creating and Appending City name and Latitude and longitude
+            const nameCode = document.createElement('SPAN');
+            nameCode.setAttribute('class', 'nameCode text-yellow-200 text-7xl items-center mx-auto');
+            const latlon = document.createElement('SPAN');
+            latlon.setAttribute('class', 'latlon text-gray-200 text-lg mx-auto my-2');
 
             nameCode.append(`${city_name}, ${country_code}`)
             latlon.append(`${lon} / ${lat}`);
 
-            const last_date = moment().add(6, 'days').format('YYYY-MM-DD');
-            let forcast = APIData.filter(item => item.valid_date > todayDate && item.valid_date <= last_date);
-
-            console.log(details.childNodes);
-
-            // let detailsChild = details.childNodes;
-            // if (detailsChild.length === 5) {
-            //     for (let i = 0; i < 5; i++) {
-            //         details.removeChild();
-            //     }
-            // }
+            details.appendChild(nameCode);
+            details.appendChild(latlon);
 
             for (let i = 0; i <= 6; i++) {
-
+                // Creating and Appending Weather Forcast of Next 7 days
                 const detailsDiv = document.createElement('DIV');
-                detailsDiv.setAttribute('class', 'flex text-gray-100 justify-around my-4')
+                detailsDiv.setAttribute('class', 'flex text-gray-100 justify-around my-4 border-l-2 border-yellow-500');
                 const dateSpan = document.createElement('SPAN');
                 dateSpan.setAttribute('class', 'date')
                 const tempSpan = document.createElement('SPAN');
                 tempSpan.setAttribute('class', 'temperature')
                 const detailsSpan = document.createElement('SPAN');
-                detailsSpan.setAttribute('class', 'details')
+                detailsSpan.setAttribute('class', 'details');
 
-                details.appendChild(detailsDiv)
-                detailsDiv.appendChild(dateSpan)
-                detailsDiv.append(tempSpan)
-                detailsDiv.append(detailsSpan)
+                details.appendChild(detailsDiv);
+                detailsDiv.appendChild(dateSpan);
+                detailsDiv.append(tempSpan);
+                detailsDiv.append(detailsSpan);
 
                 dateSpan.append(`Date: ${forcast[i].valid_date}`)
                 tempSpan.append(`${forcast[i].temp}°C`)
                 detailsSpan.append(`${forcast[i].weather.description}`)
             }
         })
-        .then(() => getData("/all"));
+        .then(() => getData("/all"))
 }
 
 // Query Service
@@ -138,6 +154,7 @@ const save = async (url, data) => {
         },
         body: JSON.stringify(data),
     });
+    // const saveResult = await res.json();
 };
 
 const getData = async (url) => {

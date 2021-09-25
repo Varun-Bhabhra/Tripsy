@@ -1,7 +1,7 @@
-let projectData = {};
-
 import moment from 'moment';
 moment().format();
+
+let projectData = {};
 
 const express = require('express');
 const cors = require('cors');
