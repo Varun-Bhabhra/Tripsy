@@ -21,6 +21,7 @@ const swapBtn = document.querySelector('#swap');
 const closeFlash = document.querySelector('#closeFlash');
 const flashMsg = document.querySelector('h1');
 const outputSection = document.querySelector('#output');
+const departure = document.querySelector('#dept');
 const details = document.querySelector('#details');
 const searchImageTag = document.querySelector('#searchImageTag');
 let input_from = document.querySelector('#from');
@@ -33,8 +34,10 @@ const monthNames = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
 // <--FUNCTIONS & EVENT LISTENERS-->
 
 // Date Function
-let d = new Date();
-let todayDate = `${d.getFullYear()}-${monthNames[d.getMonth()]}-${d.getDate()}`;
+const d = new Date();
+const todayDate = `${d.getFullYear()}-${monthNames[d.getMonth()]}-${d.getDate()}`;
+
+departure.value = todayDate;
 
 //Flash Message Logic
 const hideFlash = () => flashMsg.classList.add('hidden');
@@ -58,7 +61,6 @@ swapBtn.addEventListener('click', InputValidation);
 function test() {
     const weatherbit_final_URL = `${weatherbit_base_URL}?key=${weatherbit_api_key}&city=${input_to.value}`
     let pixabay_final_URL = `${pixabay_base_URL}?key=${pixabay_api_key}&?q=${imageSearchTerms[Math.trunc(Math.random() * imageSearchTerms.length)]}&image_type=photo&per_page=50`;
-    // console.log(pixabay_final_URL)
 
     // Responce Data from Pixabay [Image]
     getResponse(pixabay_final_URL)
@@ -92,23 +94,24 @@ function test() {
             const last_date = moment().add(7, 'days').format('YYYY-MM-DD');
             let forcast = APIData.filter(item => item.valid_date > todayDate && item.valid_date <= last_date);
 
-            console.log(details.childNodes);
-            const detailsChilds = details.childNodes;
-            if (detailsChilds.length === 12) {
-                for (let j = 0; j <= 12; j++) {
-                    console.log(details.childNodes)
-                    details.removeChild(details.childNodes[0])
+            // Remove data when clicked twice logic
+            const detailsChildren = details.children;
+            let length = detailsChildren.length
+            if (length > 1) {
+                for (let j = 0; j < length; j++) {
+                    details.removeChild(details.firstElementChild);
                 }
             }
 
-            // Creating and Appending City name and Latitude and longitude
+
+            // Creating and Appending City name & Latitude and longitude
             const nameCode = document.createElement('SPAN');
-            nameCode.setAttribute('class', 'nameCode text-yellow-200 text-7xl items-center mx-auto');
+            nameCode.setAttribute('class', 'nameCode text-yellow-200 text-7xl items-center mx-auto font-mono');
             const latlon = document.createElement('SPAN');
             latlon.setAttribute('class', 'latlon text-gray-200 text-lg mx-auto my-2');
 
-            nameCode.append(`${city_name}, ${country_code}`)
-            latlon.append(`${lon} / ${lat}`);
+            nameCode.innerText = `${city_name}, ${country_code}`
+            latlon.innerText = `${lon} / ${lat}`;
 
             details.appendChild(nameCode);
             details.appendChild(latlon);
@@ -116,7 +119,7 @@ function test() {
             for (let i = 0; i <= 6; i++) {
                 // Creating and Appending Weather Forcast of Next 7 days
                 const detailsDiv = document.createElement('DIV');
-                detailsDiv.setAttribute('class', 'flex text-gray-100 justify-around my-4 border-l-2 border-yellow-500');
+                detailsDiv.setAttribute('class', 'flex text-gray-50 justify-around my-4 border-l-2 border-yellow-500 bg-gray-500 border-r-2 border-yellow-500 bg-gray-500 opacity-80');
                 const dateSpan = document.createElement('SPAN');
                 dateSpan.setAttribute('class', 'date')
                 const tempSpan = document.createElement('SPAN');
@@ -124,18 +127,30 @@ function test() {
                 const detailsSpan = document.createElement('SPAN');
                 detailsSpan.setAttribute('class', 'details');
 
+                dateSpan.innerText = `Date: ${forcast[i].valid_date}`;
+                tempSpan.innerText = `${forcast[i].temp}°C`;
+                detailsSpan.innerText = `${forcast[i].weather.description}`;
+
                 details.appendChild(detailsDiv);
                 detailsDiv.appendChild(dateSpan);
                 detailsDiv.append(tempSpan);
                 detailsDiv.append(detailsSpan);
-
-                dateSpan.append(`Date: ${forcast[i].valid_date}`)
-                tempSpan.append(`${forcast[i].temp}°C`)
-                detailsSpan.append(`${forcast[i].weather.description}`)
             }
         })
         .then(() => getData("/all"))
 }
+
+// Search button Validation
+searchBtn.addEventListener('click', () => {
+    let fromValue = input_from.value,
+        toValue = input_to.value;
+
+    if (!fromValue || !toValue) {
+        alert('Input area is empty, add a city!')
+    } else {
+        test()
+    }
+})
 
 // Query Service
 async function getResponse(finalURL) {
@@ -166,15 +181,3 @@ const getData = async (url) => {
         console.log('error', err)
     }
 }
-
-// Search button Validation
-searchBtn.addEventListener('click', () => {
-    let fromValue = input_from.value,
-        toValue = input_to.value;
-
-    if (!fromValue || !toValue) {
-        alert('Input area is empty, add a city!')
-    } else {
-        test()
-    }
-})
